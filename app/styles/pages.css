@@ -1,0 +1,253 @@
+.page {
+  padding: 140px var(--gutter) 110px;
+  min-height: 80vh;
+}
+.page-head {
+  margin-bottom: 56px;
+}
+.page-eyebrow {
+  display: block;
+  color: var(--graphite-text);
+  margin-bottom: 18px;
+}
+.page-head h1 {
+  font-size: var(--h1);
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  max-width: 13ch;
+}
+.placeholder-note {
+  margin-top: 22px;
+  color: var(--blue-text);
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px 24px;
+}
+.work-grid .project-card {
+  width: auto;
+}
+
+/* CASE STUDY */
+.case-hero {
+  position: relative;
+  aspect-ratio: 16 / 8;
+  overflow: hidden;
+  border-radius: 4px;
+  margin-bottom: 56px;
+}
+.case-hero img {
+  object-fit: cover;
+}
+.case-body {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 48px;
+}
+.case-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.case-facts dt {
+  color: var(--graphite-text);
+  margin-bottom: 4px;
+}
+.case-facts dd {
+  font-size: 16px;
+  line-height: 1.4;
+}
+.case-copy {
+  max-width: 62ch;
+}
+.case-copy h2 {
+  font-size: clamp(26px, 3vw, 40px);
+  margin: 0 0 12px;
+}
+.case-copy p {
+  margin-bottom: 34px;
+}
+.case-next {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 70px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+}
+.case-next-link {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: var(--h2);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.case-next-link .mono {
+  color: var(--graphite-text);
+  letter-spacing: 0.14em;
+  font-weight: 400;
+}
+.case-next-link:hover {
+  color: var(--blue-text);
+}
+
+/* ABOUT */
+.about-hero {
+  background: var(--obsidian);
+  color: var(--white);
+  padding: 150px var(--gutter) 90px;
+}
+.about-hero .page-eyebrow {
+  color: var(--graphite);
+}
+.about-hero h1 {
+  font-size: var(--h1);
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  max-width: 12ch;
+  margin-bottom: 90px;
+}
+.about-statement {
+  font-weight: 500;
+  font-size: clamp(30px, 4.4vw, 66px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  max-width: 19ch;
+  margin-left: auto;
+}
+.about-body {
+  padding-top: 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+.about-body h2 {
+  font-size: var(--h2);
+  margin-bottom: 30px;
+}
+.about-offers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1.5px solid var(--ink);
+}
+.about-offer {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: background 0.3s;
+}
+.about-offer + .about-offer {
+  border-left: 1px solid var(--ink);
+}
+.about-offer:hover {
+  background: rgba(23, 24, 26, 0.04);
+}
+.about-offer .mono {
+  color: var(--blue-text);
+}
+.about-offer h3 {
+  font-size: clamp(24px, 2.6vw, 36px);
+  line-height: 1.05;
+}
+.about-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.about-steps li {
+  border-top: 1px solid var(--ink);
+  padding-top: 14px;
+}
+.about-steps .mono {
+  color: var(--graphite-text);
+}
+.about-steps h3 {
+  font-size: 32px;
+  margin: 10px 0 8px;
+}
+.about-cta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.about-cta h2 {
+  margin-bottom: 0;
+  max-width: 12ch;
+}
+
+/* CONTACT */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: clamp(32px, 6vw, 88px);
+  align-items: start;
+}
+.contact-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  border-top: 1px solid var(--ink);
+  padding-top: 16px;
+}
+.contact-aside h2 {
+  font-size: 32px;
+}
+
+/* LEGAL */
+.legal {
+  max-width: none;
+}
+.legal h1 {
+  font-size: var(--h2);
+  margin-bottom: 36px;
+}
+.legal h2 {
+  font-size: 24px;
+  letter-spacing: -0.025em;
+  margin: 28px 0 8px;
+}
+.legal p {
+  max-width: 62ch;
+}
+.legal a {
+  text-decoration: underline;
+}
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 18px;
+}
+.not-found h1 {
+  font-size: var(--h2);
+}
+
+@media (max-width: 860px) {
+  .page {
+    padding-top: 110px;
+    padding-bottom: 80px;
+  }
+  .work-grid,
+  .case-body,
+  .about-offers,
+  .about-steps,
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+  .about-offer + .about-offer {
+    border-left: none;
+    border-top: 1px solid var(--ink);
+  }
+}
