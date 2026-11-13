@@ -375,7 +375,7 @@ html.js .g-hero:not([data-ready]) .g-caption {
   /* MOBILE HERO POSITION: --m-drop moves the headline, frame, caption and
      buttons down together. --frame-top is where the framed video sits. */
   .g-sticky {
-    --m-drop: 40px;
+    --m-drop: 16px;
     --frame-w: 60vw;
     --frame-h: 75vw;
     --frame-top: calc(180px + var(--m-drop));
