@@ -33,13 +33,20 @@
 /* CASE STUDY */
 .case-hero {
   position: relative;
-  aspect-ratio: 16 / 8;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 4px;
   margin-bottom: 56px;
 }
 .case-hero img {
   object-fit: cover;
+}
+/* Loading shell for a case study: the same footprint as the real header. */
+.case-shell-head {
+  min-height: calc(var(--h1) * 0.96 + 40px);
+}
+.case-shell-hero {
+  background: rgba(23, 24, 26, 0.06);
 }
 .case-body {
   display: grid;

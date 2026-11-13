@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { optimizedSrc } from "@/lib/img";
 import { gsap, hasFinePointer, prefersReduced } from "@/lib/motion";
 
 /**
@@ -35,7 +36,7 @@ export function useCursorImage() {
   const show = (src: string) => {
     const box = boxRef.current;
     if (!box || !hasFinePointer() || prefersReduced()) return;
-    if (imgRef.current) imgRef.current.src = src;
+    if (imgRef.current) imgRef.current.src = optimizedSrc(src, 384);
     gsap.to(box, {
       opacity: 1,
       scale: 1,

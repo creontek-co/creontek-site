@@ -19,6 +19,7 @@ import {
 } from "@/lib/contact";
 import { BOOKING_URL } from "@/lib/site";
 import { playError, playSuccess } from "@/lib/sound";
+import { getLenis } from "./SmoothScroll";
 
 const initial: EnquiryState = { status: "idle" };
 
@@ -70,6 +71,26 @@ export function ContactForm() {
     else if (state.status === "error") playError();
   }, [state]);
 
+  // The long form collapses into a short message, which would leave the
+  // page scrolled down at the footer. Bring the thank-you into view instead.
+  const showSuccess = state.status === "success" && !dismissed;
+  const done = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = done.current;
+    if (!showSuccess || !el) return;
+    const modal = el.closest("dialog");
+    if (modal) {
+      modal.scrollTo({ top: 0 });
+    } else {
+      const top =
+        el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.22;
+      const lenis = getLenis();
+      if (lenis) lenis.scrollTo(Math.max(0, top), { immediate: true, force: true });
+      else window.scrollTo({ top: Math.max(0, top) });
+    }
+    el.querySelector("h3")?.focus({ preventScroll: true });
+  }, [showSuccess]);
+
   const errorFor = (f: EnquiryField) =>
     touched[f] ?? (dismissed ? undefined : state.errors?.[f]);
 
@@ -90,10 +111,10 @@ export function ContactForm() {
     "aria-describedby": `f-${f}-error`,
   });
 
-  if (state.status === "success" && !dismissed) {
+  if (showSuccess) {
     return (
-      <div className="form-success" role="status">
-        <h3>Thank you. Your enquiry is with us.</h3>
+      <div className="form-success" role="status" ref={done}>
+        <h3 tabIndex={-1}>Thank you. Your enquiry is with us.</h3>
         <p>We&apos;ll be in touch soon. If it&apos;s easier, you can pick a time now.</p>
         <a
           className="btn"

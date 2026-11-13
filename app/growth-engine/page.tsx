@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { shareMeta } from "@/lib/seo";
 import { Blueprint } from "@/components/growth/Blueprint";
 import { DraftingTable } from "@/components/growth/DraftingTable";
 import { ProblemTabs } from "@/components/growth/ProblemTabs";
@@ -10,11 +11,11 @@ export const metadata: Metadata = {
   title: { absolute: PAGE_META.growth.title },
   description: PAGE_META.growth.description,
   alternates: { canonical: "/growth-engine" },
-  openGraph: {
+  ...shareMeta({
     title: PAGE_META.growth.title,
     description: PAGE_META.growth.description,
-    url: "/growth-engine",
-  },
+    path: "/growth-engine",
+  }),
 };
 
 export default function GrowthEnginePage() {
@@ -54,11 +55,11 @@ export default function GrowthEnginePage() {
         <div className="spec-prices">
           <p>
             <span className="mono">Starting point</span>
-            Implementation from $2,500
+            Implementation from $2,499
           </p>
           <p>
             <span className="mono">Starting point</span>
-            Management from $800/month
+            Management from $799/month
           </p>
         </div>
       </section>

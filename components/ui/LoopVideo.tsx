@@ -1,13 +1,19 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { optimizedSrc } from "@/lib/img";
 
-/** V4, or any looping video: muted, inline, paused while off-screen. */
+const GLASS_POSTER = optimizedSrc("/media/glass-panels-poster.png", 960);
+
+/**
+ * The glass-panels studio video by default (Studio door card and Studio hero),
+ * or any looping video: muted, inline, paused while off-screen.
+ */
 export function LoopVideo({
   className,
-  webm = "/media/v4-studio.webm",
-  mp4 = "/media/v4-studio.mp4",
-  poster = "/media/v4-poster.jpg",
+  webm = "",
+  mp4 = "/media/glass-panels.mp4",
+  poster = GLASS_POSTER,
 }: {
   className?: string;
   webm?: string;

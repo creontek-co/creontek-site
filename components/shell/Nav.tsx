@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Wordmark } from "@/components/ui/Logo";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 import { NAV_LINKS } from "@/lib/site";
 import { getLenis } from "./SmoothScroll";
 import { SoundIconToggle, SoundToggle } from "./SoundToggle";
@@ -75,6 +76,7 @@ export function Nav() {
             </Link>
           ))}
         </nav>
+        <SocialLinks className="menu-socials" />
       </div>
     </>
   );

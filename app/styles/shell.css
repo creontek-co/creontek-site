@@ -286,6 +286,117 @@ html:has(.contact-modal[open]) .cursor {
   gap: 10px;
   font-size: 15px;
 }
+
+/* SOCIAL LINKS (footer, mobile menu, contact page) */
+/*
+ * Icon-only round buttons. On hover the circle fills from its centre in the
+ * text colour, the button lifts, and the logo pops and flips to the
+ * background colour (--social-bg). Only transform and colour change.
+ */
+.socials {
+  --social-size: 44px;
+  --social-bg: var(--obsidian);
+  --social-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.socials a {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  width: var(--social-size);
+  height: var(--social-size);
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, currentColor 32%, transparent);
+  color: inherit;
+  overflow: hidden;
+  transition:
+    transform 0.5s var(--social-ease),
+    border-color 0.3s ease;
+}
+.socials a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: currentColor;
+  transform: scale(0);
+  transition: transform 0.5s var(--social-ease);
+}
+.socials svg {
+  width: 18px;
+  height: 18px;
+  transition:
+    transform 0.5s var(--social-ease),
+    color 0.25s ease;
+}
+@media (hover: hover) {
+  .socials a:hover {
+    transform: translateY(-4px);
+    border-color: currentColor;
+  }
+  .socials a:hover::before {
+    transform: scale(1);
+  }
+  .socials a:hover svg {
+    color: var(--social-bg);
+    transform: scale(1.18) rotate(-8deg);
+  }
+}
+.socials a:focus-visible {
+  border-color: currentColor;
+}
+.socials a:focus-visible::before {
+  transform: scale(1);
+}
+.socials a:focus-visible svg {
+  color: var(--social-bg);
+}
+.socials a:active {
+  transform: scale(0.92);
+}
+@media (prefers-reduced-motion: reduce) {
+  .socials a,
+  .socials a::before,
+  .socials svg {
+    transition-duration: 0.01s;
+  }
+  .socials a:hover,
+  .socials a:hover svg {
+    transform: none;
+  }
+}
+
+/*
+ * Footer: on desktop the "Follow" group shares the middle column with Academy
+ * and Labs, pinned to the bottom so it lines up with the end of the nav.
+ */
+.footer-soon {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+}
+.footer-follow {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.footer-follow-label {
+  color: var(--graphite);
+}
+.contact-socials {
+  --social-bg: var(--paper);
+  margin-top: 8px;
+}
 .footer-soon em {
   display: inline-block;
   white-space: nowrap;
@@ -427,7 +538,7 @@ html:has(.contact-modal[open]) .cursor {
   top: 0;
   z-index: 40;
   width: 340px;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   pointer-events: none;
   opacity: 0;
@@ -543,6 +654,17 @@ html:has(.contact-modal[open]) .cursor {
 .form-success h3 {
   font-size: 28px;
 }
+.form-success h3:focus {
+  outline: none;
+}
+/* On the contact page, hold the form's space so the footer stays below the fold. */
+.contact-layout .form-success {
+  min-height: min(62vh, 560px);
+  justify-content: center;
+}
+.contact-layout .form-success h3 {
+  font-size: clamp(30px, 3.6vw, 44px);
+}
 
 @media (max-width: 860px) {
   .nav {
@@ -568,6 +690,21 @@ html:has(.contact-modal[open]) .cursor {
   }
   .footer-cols nav {
     grid-column: 1 / -1;
+  }
+  .footer-soon {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  /* Follow spans the full width on its own row, under a hairline. */
+  .footer-follow {
+    grid-row: auto;
+    align-self: auto;
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 22px;
+    border-top: 1px solid #262628;
   }
   .form-grid {
     grid-template-columns: 1fr;

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { shareMeta } from "@/lib/seo";
 import Link from "next/link";
 import { BookButton } from "@/components/ui/Buttons";
 import {
@@ -14,6 +15,11 @@ export const metadata: Metadata = {
   description:
     "CreonTek builds technology that moves businesses forward, through Studio and Growth Engine.",
   alternates: { canonical: "/about" },
+  ...shareMeta({
+    title: "About | CreonTek",
+    description: "CreonTek builds technology that moves businesses forward, through Studio and Growth Engine.",
+    path: "/about",
+  }),
 };
 
 export default function AboutPage() {

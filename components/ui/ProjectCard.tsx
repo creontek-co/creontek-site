@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { optimizedSrc } from "@/lib/img";
 import type { Project } from "@/lib/site";
 import { LoopVideo } from "./LoopVideo";
 
@@ -19,9 +20,13 @@ export function ProjectCard({
         className="project-media"
       >
         {project.video ? (
-          <LoopVideo webm="" mp4={project.video} poster={project.image} />
+          <LoopVideo
+            webm=""
+            mp4={project.video}
+            poster={optimizedSrc(project.image, 384)}
+          />
         ) : (
-          <Image src={project.image} alt="" fill sizes={sizes} unoptimized />
+          <Image src={project.image} alt="" fill sizes={sizes} />
         )}
         <span className="project-tag">{project.offer}</span>
         {project.placeholder ? (

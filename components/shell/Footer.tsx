@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { CONTACT_EMAIL, SOCIALS } from "@/lib/site";
+import { SocialLinks } from "@/components/ui/SocialLinks";
+import { CONTACT_EMAIL } from "@/lib/site";
 import { INTRO_FLAG, REPLAY_EVENT } from "@/lib/stage";
 import { DotWordmark } from "./DotWordmark";
 import { SoundToggle } from "./SoundToggle";
@@ -31,7 +32,6 @@ function LocalTime({ city, zone }: { city: string; zone: string }) {
 
 export function Footer() {
   const pathname = usePathname();
-  const socials = SOCIALS.filter((s) => s.href);
 
   const replay = () => {
     try {
@@ -68,11 +68,10 @@ export function Footer() {
           <LocalTime city="Dubai" zone="Asia/Dubai" />
           <LocalTime city="Amsterdam" zone="Europe/Amsterdam" />
           <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
-          {socials.map((s) => (
-            <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer">
-              {s.label}
-            </a>
-          ))}
+        </div>
+        <div className="footer-follow">
+          <span className="mono footer-follow-label">Follow</span>
+          <SocialLinks className="footer-socials" />
         </div>
       </div>
 

@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { BookButton } from "@/components/ui/Buttons";
 import { MaskHeading, ScrambleText } from "@/components/ui/Reveal";
+import { shareMeta } from "@/lib/seo";
 import { PROJECTS } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -20,14 +22,42 @@ export async function generateMetadata({
     title: project.title,
     description: project.summary,
     alternates: { canonical: `/work/${slug}` },
+    ...shareMeta({
+      title: `${project.title} | CreonTek`,
+      description: project.summary,
+      path: `/work/${slug}`,
+    }),
     // Placeholder case studies stay out of search until they're real.
     robots: project.placeholder ? { index: false } : undefined,
   };
 }
 
-export default async function CaseStudyPage({
-  params,
-}: PageProps<"/work/[slug]">) {
+type Params = PageProps<"/work/[slug]">["params"];
+
+/**
+ * The slug is URL data, so reading it sits inside <Suspense>: navigations into
+ * a case study show this page's shell at once instead of waiting. Every slug is
+ * prerendered by generateStaticParams, so in production the fallback is rarely
+ * seen, and it holds the same space as the real page so nothing jumps.
+ */
+export default function CaseStudyPage({ params }: PageProps<"/work/[slug]">) {
+  return (
+    <Suspense fallback={<CaseStudyShell />}>
+      <CaseStudy params={params} />
+    </Suspense>
+  );
+}
+
+function CaseStudyShell() {
+  return (
+    <article className="page paper" aria-busy="true">
+      <header className="page-head case-shell-head" />
+      <div className="case-hero case-shell-hero" />
+    </article>
+  );
+}
+
+async function CaseStudy({ params }: { params: Params }) {
   const { slug } = await params;
   const index = PROJECTS.findIndex((p) => p.slug === slug);
   if (index < 0) notFound();
@@ -55,8 +85,7 @@ export default async function CaseStudyPage({
           alt=""
           fill
           sizes="100vw"
-          unoptimized
-          priority
+          preload
         />
       </div>
 

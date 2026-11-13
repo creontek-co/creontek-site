@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { shareMeta } from "@/lib/seo";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { MaskHeading, ScrambleText } from "@/components/ui/Reveal";
 import { PROJECTS } from "@/lib/site";
@@ -8,6 +9,11 @@ export const metadata: Metadata = {
   description:
     "Selected work and explorations from CreonTek Studio and Growth Engine.",
   alternates: { canonical: "/work" },
+  ...shareMeta({
+    title: "Work | CreonTek",
+    description: "Selected work and explorations from CreonTek Studio and Growth Engine.",
+    path: "/work",
+  }),
 };
 
 export default function WorkPage() {

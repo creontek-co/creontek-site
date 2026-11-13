@@ -71,7 +71,7 @@ export function WorkGallery() {
         <div className="s-gallery-stage">
           {PROJECTS.map((p) => (
             <Link key={p.slug} href={`/work/${p.slug}`} className="s-shot" data-cursor="View">
-              <Image src={p.image} alt={`${p.title}, ${p.industry}`} fill sizes="(max-width: 860px) 45vw, 30vw" unoptimized />
+              <Image src={p.image} alt={`${p.title}, ${p.industry}`} fill sizes="(max-width: 860px) 45vw, 30vw" />
               {p.placeholder ? <span>Placeholder</span> : null}
             </Link>
           ))}

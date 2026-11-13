@@ -35,7 +35,11 @@ export function Cursor() {
       const t = e.target as Element | null;
       if (!t?.closest) return;
       // Dropdown menus are native popups a custom cursor can't follow.
-      el.dataset.hidden = t.closest("[data-cursor-none], select") ? "1" : "";
+      // Social buttons fill and lift on hover, which marks the pointer on its
+      // own; the dot would only invert the logo inside them.
+      el.dataset.hidden = t.closest("[data-cursor-none], select, .socials a")
+        ? "1"
+        : "";
       const hit = t.closest<HTMLElement>("[data-cursor]");
       if (hit?.dataset.cursor) {
         if (label.current) label.current.textContent = hit.dataset.cursor;

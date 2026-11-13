@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { shareMeta } from "@/lib/seo";
 import { GalleryHero } from "@/components/studio/GalleryHero";
 import { Services } from "@/components/studio/Services";
 import { WorkGallery } from "@/components/studio/WorkGallery";
@@ -10,11 +11,11 @@ export const metadata: Metadata = {
   title: { absolute: PAGE_META.studio.title },
   description: PAGE_META.studio.description,
   alternates: { canonical: "/studio" },
-  openGraph: {
+  ...shareMeta({
     title: PAGE_META.studio.title,
     description: PAGE_META.studio.description,
-    url: "/studio",
-  },
+    path: "/studio",
+  }),
 };
 
 const WEEKS = 8;

@@ -94,7 +94,12 @@ export function SoundDirector() {
       if (t?.closest) onClick(t);
     };
     const key = (e: KeyboardEvent) => {
-      if (e.key.length === 1 && (e.target as Element).matches?.("input, textarea")) {
+      // Autofill fires keydown events with no `key`, so check its type first.
+      if (
+        typeof e.key === "string" &&
+        e.key.length === 1 &&
+        (e.target as Element | null)?.matches?.("input, textarea")
+      ) {
         S.playKey();
       }
     };

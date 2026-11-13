@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { Shell } from "@/components/shell/Shell";
-import { PAGE_META, SITE_URL } from "@/lib/site";
+import { PAGE_META, SITE_URL, SOCIALS } from "@/lib/site";
 import { INTRO_FLAG } from "@/lib/stage";
 import "./globals.css";
 
@@ -56,6 +56,8 @@ const jsonLd = {
       name: "CreonTek",
       url: SITE_URL,
       logo: `${SITE_URL}/brand/creontek-logo-black.svg`,
+      // Social profiles, so search engines link them to the brand.
+      sameAs: SOCIALS.filter((s) => s.href).map((s) => s.href),
       description: PAGE_META.home.description,
     },
     {
@@ -63,7 +65,7 @@ const jsonLd = {
       "@id": `${SITE_URL}/#service`,
       name: "CreonTek",
       url: SITE_URL,
-      image: `${SITE_URL}/opengraph-image`,
+      image: `${SITE_URL}/opengraph-image.png`,
       description: PAGE_META.home.description,
       areaServed: "Worldwide",
       parentOrganization: { "@id": `${SITE_URL}/#organization` },

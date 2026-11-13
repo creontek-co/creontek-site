@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { shareMeta } from "@/lib/seo";
 import { ContactForm } from "@/components/shell/ContactForm";
 import { BookButton } from "@/components/ui/Buttons";
 import { MaskHeading, ScrambleText } from "@/components/ui/Reveal";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 import { CONTACT_EMAIL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -9,6 +11,11 @@ export const metadata: Metadata = {
   description:
     "Book a strategy call or send CreonTek an enquiry about Studio or Growth Engine.",
   alternates: { canonical: "/contact" },
+  ...shareMeta({
+    title: "Contact | CreonTek",
+    description: "Book a strategy call or send CreonTek an enquiry about Studio or Growth Engine.",
+    path: "/contact",
+  }),
 };
 
 export default function ContactPage() {
@@ -27,6 +34,7 @@ export default function ContactPage() {
           <a className="text-link" href={`mailto:${CONTACT_EMAIL}`}>
             {CONTACT_EMAIL}
           </a>
+          <SocialLinks className="contact-socials" />
         </aside>
       </div>
     </div>

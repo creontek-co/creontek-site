@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { BookButton, Pill } from "@/components/ui/Buttons";
 import { LoopVideo } from "@/components/ui/LoopVideo";
+import { optimizedSrc } from "@/lib/img";
 import {
   gsap,
   hasFinePointer,
@@ -18,6 +19,8 @@ import { whenStageClear } from "@/lib/stage";
 const TRAIL_STEP = 80;
 const TRAIL_LIFE = 0.9;
 const TRAIL_POOL = 14;
+/** How dark the video gets behind "Every pixel, considered." (0 to 1). */
+const DIM_LEVEL = 0.45;
 
 function HeadWords({ text, side }: { text: string; side: string }) {
   return (
@@ -47,6 +50,7 @@ export function GalleryHero() {
       const frame = q<HTMLElement>(".g-frame")[0];
       const caption = q<HTMLElement>(".g-caption")[0];
       const closing = q<HTMLElement>(".g-closing")[0];
+      const dim = q<HTMLElement>(".g-dim")[0];
       const ctas = q<HTMLElement>(".g-ctas")[0];
 
       // The window is the full-bleed video, clipped down to the frame's box.
@@ -149,6 +153,8 @@ export function GalleryHero() {
           0.02,
         );
       });
+      // The video darkens just before the white line arrives, so it reads clearly.
+      tl.to(dim, { opacity: DIM_LEVEL, duration: 0.14 }, 0.66);
       tl.to(closing, { opacity: 1, y: 0, duration: 0.14 }, 0.76);
       tl.to({}, { duration: 0.1 });
 
@@ -208,7 +214,11 @@ export function GalleryHero() {
         <div className="g-trail" aria-hidden="true">
           {Array.from({ length: TRAIL_POOL }, (_, i) => (
             // eslint-disable-next-line @next/next/no-img-element
-            <img key={i} src={PROJECTS[i % PROJECTS.length].image} alt="" />
+            <img
+              key={i}
+              src={optimizedSrc(PROJECTS[i % PROJECTS.length].image, 256)}
+              alt=""
+            />
           ))}
         </div>
 
@@ -237,6 +247,7 @@ export function GalleryHero() {
           <Pill href="/work">View work</Pill>
         </div>
 
+        <div className="g-dim" aria-hidden="true" />
         <p className="g-closing">Every pixel, considered.</p>
       </div>
     </section>
